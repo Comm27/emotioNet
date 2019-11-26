@@ -3,11 +3,16 @@ from tensorflow import keras
 from tensorflow.keras.preprocessing.image import img_to_array
 import cv2
 import numpy as np
+import os
+
+cascadePath = os.path.join('..', 'haarcascade_frontalface_default.xml')
+modelPath = os.path.join('..', 'model-gpu2.hdf5')
 
 camera = cv2.VideoCapture(0)
-detector = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
-model = keras.models.load_model('model-gpu2.hdf5')
+detector = cv2.CascadeClassifier(cascadePath)
+model = keras.models.load_model(modelPath)
 class_labels = ['Angry', 'Disgust', 'Fear', 'Happy', 'Sad', 'Surprise', 'Neutral']
+
 
 while True:
     _, frame = camera.read()
